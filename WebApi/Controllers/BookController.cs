@@ -1,9 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
 using WebApi.BookOperations.CreateBook;
+using WebApi.BookOperations.GetBookDetail;
 using WebApi.BookOperations.GetBooks;
 using WebApi.BookOperations.UpdateBook;
 using WebApi.DBOperations;
 using static WebApi.BookOperations.CreateBook.CreateBookCommand;
+using static WebApi.BookOperations.GetBookDetail.GetBookDetailQuery;
 using static WebApi.BookOperations.UpdateBook.UpdateBookCommand;
 
 namespace WebApi.Controllers;
@@ -31,8 +33,17 @@ public class BookController : ControllerBase
     [HttpGet("{id}")]
     public IActionResult GetById(int id)
     {
-        GetByIdQuery query = new GetByIdQuery(_context);
-        var result = query.Handle(id); 
+        BookDetailViewModel result;        
+        try
+        {
+            GetBookDetailQuery query = new GetBookDetailQuery(_context);
+            query.BookId = id;
+            result = query.Handle(); 
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
         return Ok(result);
     }
 
@@ -67,7 +78,8 @@ public class BookController : ControllerBase
         try
         {
             command.Model = updatedBook;
-            command.Handle(id);
+            command.BookId = id;
+            command.Handle();
         }
         catch (Exception ex)
         {
