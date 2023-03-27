@@ -87,6 +87,8 @@ public class BookController : ControllerBase
         {
             command.Model = updatedBook;
             command.BookId = id;
+            UpdateBookCommandValidator validator = new UpdateBookCommandValidator();
+            validator.ValidateAndThrow(command);
             command.Handle();
         }
         catch (Exception ex)
