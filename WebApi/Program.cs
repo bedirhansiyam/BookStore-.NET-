@@ -3,6 +3,7 @@ using WebApi.DBOperations;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 using WebApi.Middlewares;
+using WebApi.Services;
 
 namespace WebApi;
 
@@ -18,6 +19,7 @@ public class Program
         builder.Services.AddSwaggerGen();
         builder.Services.AddDbContext<BookStoreDbContext>(options => options.UseInMemoryDatabase(databaseName: "BookStoreDB"));
         builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
+        builder.Services.AddSingleton<ILoggerService, ConsoleLogger>();
 
         var app = builder.Build();
 
