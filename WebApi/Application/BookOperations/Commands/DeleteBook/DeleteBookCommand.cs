@@ -16,8 +16,8 @@ public class DeleteBookCommand
     {
         var book = _dbContext.Books.SingleOrDefault(x => x.Id == BookId);
         if(book is null)
-            throw new InvalidOperationException("The book is not exist");
-
+            throw new InvalidOperationException("The book doesn't exist");
+        
         _dbContext.Books.Remove(book);
         _dbContext.SaveChanges();
     }
