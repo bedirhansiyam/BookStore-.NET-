@@ -1,4 +1,4 @@
-namespace WebApi.BookOperations.GetBookDetail;
+namespace WebApi.Application.BookOperations.Queries.GetBookDetail;
 
 using FluentValidation;
 

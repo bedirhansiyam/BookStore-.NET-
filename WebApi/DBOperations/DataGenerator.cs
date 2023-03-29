@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using WebApi.Entites;
 
 namespace WebApi.DBOperations;
 
@@ -14,6 +15,7 @@ public class DataGenerator
             }
             else
             {
+                
                 context.Books.AddRange(    
                     new Book
                     {
@@ -40,6 +42,17 @@ public class DataGenerator
                         PublishDate = new DateTime(2001,12,05)
                     }
             );
+            context.Genres.AddRange(
+                    new Genre{
+                        Name = "Personel Growth",
+                    },
+                    new Genre{
+                        Name = "Science Fiction",
+                    },
+                    new Genre{
+                        Name = "Romance",
+                    }
+                );
             }          
             
             context.SaveChanges();
