@@ -21,7 +21,7 @@ public class CreateBookCommand
         var book = _dbContext.Books.SingleOrDefault(x => x.Title == Model.Title);
 
         if(book is not null)
-            throw new InvalidOperationException("The book already exist");
+            throw new InvalidOperationException("The book already exists.");
         book = _mapper.Map<Book>(Model);
 
         _dbContext.Books.Add(book);
@@ -31,6 +31,7 @@ public class CreateBookCommand
     public class CreateBookModel
     {
         public string Title { get; set; }
+        public int AuthorId { get; set; }
         public int GenreId { get; set; }
         public int PageCount { get; set; }
         public DateTime PublishDate { get; set; }

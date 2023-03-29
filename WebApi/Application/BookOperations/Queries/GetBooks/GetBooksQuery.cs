@@ -20,7 +20,7 @@ public class GetBooksQuery
 
     public List<BooksViewModel> Handle()
     {
-        var bookList = _dbcontext.Books.Include(x => x.Genre).OrderBy(x => x.Id)
+        var bookList = _dbcontext.Books.Include(x => x.Genre).Include(x => x.Author).OrderBy(x => x.Id)
             .ToList<Book>();
         List<BooksViewModel> vm = _mapper.Map<List<BooksViewModel>>(bookList);
         return vm;
@@ -29,8 +29,10 @@ public class GetBooksQuery
     public class BooksViewModel
     {
         public string Title { get; set; }
+        public string Author { get; set; }
         public int PageCount { get; set; }
         public string PublishDate { get; set; }
         public string Genre { get; set; }
+        
     }
 }
