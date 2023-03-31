@@ -8,6 +8,7 @@ using static WebApi.Application.AuthorOperations.Queries.GetAuthors.GetAuthorsQu
 using static WebApi.Application.BookOperations.Commands.CreateBook.CreateBookCommand;
 using static WebApi.Application.BookOperations.Queries.GetBookDetail.GetBookDetailQuery;
 using static WebApi.Application.BookOperations.Queries.GetBooks.GetBooksQuery;
+using static WebApi.Application.UserOperations.Commands.CreateUser.CreateUserCommand;
 
 namespace WebApi.Common;
 
@@ -23,6 +24,7 @@ public class MappingProfile : Profile
         CreateMap<CreateAuthorModel, Author>();
         CreateMap<Author, AuthorsViewModel>();
         CreateMap<Author, AuthorDetailViewModel>();
+        CreateMap<CreateUserModel, User>();
 
     }
 }
