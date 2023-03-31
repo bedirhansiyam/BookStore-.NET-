@@ -17,7 +17,7 @@ public class CreateGenreCommand
     {
         var genre = _context.Genres.SingleOrDefault(x => x.Name == Model.Name);
         if(genre is not null)
-            throw new InvalidOperationException("Genre is already exist.");
+            throw new InvalidOperationException("Genre already exist.");
 
         genre = new Genre();
         genre.Name = Model.Name;

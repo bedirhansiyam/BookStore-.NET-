@@ -19,11 +19,15 @@ public class UpdateBookCommand
         if(book is null)
             throw new InvalidOperationException("The book doesn't exist.");
 
-        book.GenreId = Model.GenreId != default ? Model.GenreId : book.GenreId;
-        book.AuthorId = Model.AuthorId != default ? Model.AuthorId : book.AuthorId;
-        book.PageCount = Model.PageCount != default ? Model.PageCount : book.PageCount;
-        book.PublishDate = Model.PublishDate != default ? Model.PublishDate : book.PublishDate;
-        book.Title = Model.Title != default ? Model.Title : book.Title;        
+        var book2 = _dbContext.Books.SingleOrDefault(x => x.Title == Model.Title);
+        if(book2 is not null)
+            throw new InvalidOperationException("The book name already exists.");
+
+        book.GenreId = Model.GenreId == default ? book.GenreId : Model.GenreId;
+        book.AuthorId = Model.AuthorId == default ? book.AuthorId : Model.AuthorId;
+        book.PageCount = Model.PageCount == default ? book.PageCount : Model.PageCount;
+        book.PublishDate = Model.PublishDate.Date == DateTime.Now.Date ? book.PublishDate : Model.PublishDate;
+        book.Title = Model.Title == default ? book.Title : Model.Title;        
 
         _dbContext.SaveChanges();
     }
@@ -34,6 +38,6 @@ public class UpdateBookCommand
         public int AuthorId { get; set; }
         public int GenreId { get; set; }
         public int PageCount { get; set; }
-        public DateTime PublishDate { get; set; }
+        public DateTime PublishDate { get; set; } 
     }
 }

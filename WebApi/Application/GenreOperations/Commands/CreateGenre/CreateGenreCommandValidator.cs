@@ -6,6 +6,6 @@ public class CreateGenreCommandValidator : AbstractValidator<CreateGenreCommand>
 {
     public CreateGenreCommandValidator()
     {
-        RuleFor(command => command.Model.Name).NotEmpty().MaximumLength(4);
+        RuleFor(command => command.Model.Name).NotEmpty().MinimumLength(4);
     }
 }

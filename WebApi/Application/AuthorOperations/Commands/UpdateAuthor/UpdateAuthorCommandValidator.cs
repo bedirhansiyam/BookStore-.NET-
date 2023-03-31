@@ -8,7 +8,7 @@ public class UpdateAuthorCommandValidator : AbstractValidator<UpdateAuthorComman
     {
         RuleFor(command => command.Model.Name).MinimumLength(2).When(x => x.Model.Name != string.Empty);
         RuleFor(command => command.Model.Surname).MinimumLength(2).When(x => x.Model.Surname != string.Empty);
-        RuleFor(command => command.Model.BirthDate.Date).NotEmpty().LessThan(DateTime.Now);
+        RuleFor(command => command.Model.BirthDate.Date).NotEmpty().LessThan(DateTime.Now.Date);
         RuleFor(command => command.AuthorId).GreaterThan(0);
     }
 }
